@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="TripPlanner.AppHost/TripPlanner.AppHost.csproj" />
+  <Project Path="TripPlanner.ServiceDefaults/TripPlanner.ServiceDefaults.csproj" />
+  <Project Path="TripPlanner/TripPlanner.csproj" />
+</Solution>
