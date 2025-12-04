@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:TripPlanner.Models"
+             x:Class="TripPlanner.Pages.Controls.VacationCard"
+             x:DataType="models:Vacation">
+
+    <Border Padding="12"
+        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+        Stroke="#E0E0E0"
+        StrokeThickness="1"
+        Margin="0 30 15 10">
+        <Border.Shadow>
+            <Shadow Brush="Gray" Opacity="0.8" Offset="10,10" Radius="15" />
+        </Border.Shadow>
+
+        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto">
+            <Label Text="{Binding Name}"
+               Grid.Column="0"
+               VerticalOptions="Center"
+               LineBreakMode="WordWrap"
+               MaxLines="2"
+               FontAttributes="Bold" />
+            
+            <Grid Grid.Column="1"
+                  ColumnDefinitions="Auto, *"
+                  RowDefinitions="Auto, Auto"
+                  ColumnSpacing="8"
+                  RowSpacing="6"
+                  HorizontalOptions="End"
+                  VerticalOptions="Center">
+                <Label Text="Start Date:"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalTextAlignment="End"
+                       VerticalOptions="Center"
+                       FontAttributes="Bold" />
+                <Label Text="{Binding StartDate, StringFormat='{}{0:MM/dd/yyyy}'}"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       VerticalOptions="Center" />
+
+                <Label Text="End Date:"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       HorizontalTextAlignment="End"
+                       VerticalOptions="Center"
+                       FontAttributes="Bold" />
+                <Label Text="{Binding EndDate, StringFormat='{}{0:MM/dd/yyyy}'}"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+    </Border>
+</ContentView>

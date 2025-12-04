@@ -4,14 +4,15 @@
              xmlns:cards="clr-namespace:Syncfusion.Maui.Cards;assembly=Syncfusion.Maui.Cards"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:data="clr-namespace:TripPlanner.Data"
+             xmlns:controls="clr-namespace:TripPlanner.Pages.Controls"
              x:Class="TripPlanner.Pages.VacationDashboard"
              Title="Vacation Dashboard">
     <Shell.TitleView>
         <Grid>
-            <Label
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   TextType="Html"/>
+            <Label HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                Vacation Dashboard
+            </Label>
         </Grid>
     </Shell.TitleView>
     <ContentPage.BindingContext>
@@ -25,76 +26,12 @@
                          AutoFitMode="Height">
         <listview:SfListView.ItemTemplate>
             <DataTemplate>
-                <Border Padding="12"
-                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-                        Stroke="#E0E0E0"
-                        StrokeThickness="1"
-                        Margin="0 30 15 10">
-                    <Border.Shadow>
-                        <Shadow Brush="Gray" Opacity="0.8" Offset="10,10" Radius="15" />
-                    </Border.Shadow>
-                    <!-- Use flexible columns: Name gets flexible space, dates stay Auto -->
-                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto">
-                        <!-- Vacation name: allow wrapping and expansion -->
-                        <Label Text="{Binding Name}"
-                               Grid.Column="0"
-                               VerticalOptions="Center"
-                               LineBreakMode="WordWrap"
-                               MaxLines="2"
-                               FontAttributes="Bold" />
-
-                        <!-- Dates stack: two horizontal rows (Start / End) -->
-                        <VerticalStackLayout Grid.Column="1"
-                                             Spacing="6"
-                                             HorizontalOptions="End">
-                            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-                                <Label Text="Start Date:" HorizontalTextAlignment="End" />
-                                <Label Text="{Binding StartDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
-                            </HorizontalStackLayout>
-                            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-                                <Label Text="End Date:" HorizontalTextAlignment="End" />
-                                <Label Text="{Binding EndDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
-                            </HorizontalStackLayout>
-                        </VerticalStackLayout>
-                    </Grid>
-                </Border>
+                <controls:VacationCard IsSelected="False" />
             </DataTemplate>
         </listview:SfListView.ItemTemplate>
         <listview:SfListView.SelectedItemTemplate>
             <DataTemplate>
-                <Border Padding="12"
-            BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
-            Stroke="Orange"
-            StrokeThickness="1"
-            Margin="0 30 15 10">
-                    <Border.Shadow>
-                        <Shadow Brush="Gray" Opacity="0.8" Offset="10,10" Radius="15" />
-                    </Border.Shadow>
-                    <!-- Use flexible columns: Name gets flexible space, dates stay Auto -->
-                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto">
-                        <!-- Vacation name: allow wrapping and expansion -->
-                        <Label Text="{Binding Name}"
-                   Grid.Column="0"
-                   VerticalOptions="Center"
-                   LineBreakMode="WordWrap"
-                   MaxLines="2"
-                   FontAttributes="Bold" />
-
-                        <!-- Dates stack: two horizontal rows (Start / End) -->
-                        <VerticalStackLayout Grid.Column="1"
-                                 Spacing="6"
-                                 HorizontalOptions="End">
-                            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-                                <Label Text="Start Date:" HorizontalTextAlignment="End" />
-                                <Label Text="{Binding StartDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
-                            </HorizontalStackLayout>
-                            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-                                <Label Text="End Date:" HorizontalTextAlignment="End" />
-                                <Label Text="{Binding EndDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
-                            </HorizontalStackLayout>
-                        </VerticalStackLayout>
-                    </Grid>
-                </Border>
+                <controls:VacationCard IsSelected="True" />
             </DataTemplate>
         </listview:SfListView.SelectedItemTemplate>
     </listview:SfListView>
