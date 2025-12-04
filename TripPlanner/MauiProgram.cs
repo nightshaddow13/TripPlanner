@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui;
+using Syncfusion.Maui.Core.Hosting;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Toolkit.Hosting;
 
@@ -11,6 +12,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+            .ConfigureSyncfusionCore()
 			.UseMauiCommunityToolkit()
 			.ConfigureSyncfusionToolkit()
 			.ConfigureMauiHandlers(handlers =>
