@@ -70,12 +70,22 @@
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
 		<PackageReference Include="Syncfusion.Maui.Cards" Version="31.2.16" />
 		<PackageReference Include="Syncfusion.Maui.Expander" Version="31.2.16" />
+		<PackageReference Include="Syncfusion.Maui.Inputs" Version="31.2.16" />
 		<PackageReference Include="Syncfusion.Maui.ListView" Version="31.2.16" />
 		<PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.7" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\Controls\VacationComboBox.xaml.cs">
+	    <DependentUpon>VacationComboBox.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Pages\Controls\VacationCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Controls\VacationComboBox.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\VacationDashboard.xaml">
