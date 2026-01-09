@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace TripPlanner.Models;
 
 public partial class Vacation : INotifyPropertyChanged
 {
+    [Bindable(false)]
     public long ID 
     {
         get => field;
@@ -14,19 +16,24 @@ public partial class Vacation : INotifyPropertyChanged
         }
     }
 
+    [DataType(DataType.Text)]
+    [Required]
+    [MinLength(5)]
     public string Name 
     {
         get => field ?? string.Empty;
         set
         {
-            if (string.IsNullOrEmpty(value))
-                throw new ArgumentException("Name cannot be null or empty.");
+            //if (string.IsNullOrEmpty(value))
+            //    throw new ArgumentException("Name cannot be null or empty.");
 
             field = value;
             OnPropertyChanged(nameof(Name));
         }
     }
 
+    [DataType(DataType.Date)]
+    [Required]
     public DateTimeOffset StartDate 
     {
         get => field;
@@ -37,6 +44,8 @@ public partial class Vacation : INotifyPropertyChanged
         }
     }
 
+    [DataType(DataType.Date)]
+    [Required]
     public DateTimeOffset EndDate 
     {
         get => field;

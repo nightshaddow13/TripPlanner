@@ -12,12 +12,6 @@
     <Shell.FlyoutHeader>
         <controls:VacationComboBox Margin="10" />
     </Shell.FlyoutHeader>
-    
-    <ShellContent
-        Title="Dashboard"
-        Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate pages:NewVacationPage}"
-        Route="dashboard" />
 
     <ShellContent
         Title="EDashboard"
