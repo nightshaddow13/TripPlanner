@@ -16,7 +16,7 @@
     <ShellContent
         Title="Dashboard"
         Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate pages:NewVacation}"
+        ContentTemplate="{DataTemplate pages:NewVacationPage}"
         Route="dashboard" />
 
     <ShellContent

@@ -1,5 +1,10 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
   <Project Path="TripPlanner.AppHost/TripPlanner.AppHost.csproj" />
   <Project Path="TripPlanner.ServiceDefaults/TripPlanner.ServiceDefaults.csproj" />
-  <Project Path="TripPlanner/TripPlanner.csproj" />
+  <Project Path="TripPlanner/TripPlanner.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>

@@ -9,9 +9,11 @@
     </ContentView.BindingContext>
 
     <ContentView.Content>
-        <editors:SfComboBox ItemsSource="{Binding Vacations}"
+        <editors:SfComboBox x:Name="comboBox" 
+                            ItemsSource="{Binding Vacations}"
                             SelectedIndex="0"
                             TextMemberPath="Name"
-                            IsClearButtonVisible="False"/>
+                            IsClearButtonVisible="False"
+                            SelectionChanged="OnSelectionChanged" />
     </ContentView.Content>
 </ContentView>

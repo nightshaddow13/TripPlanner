@@ -1,8 +1,8 @@
 namespace TripPlanner.Pages;
 
-public partial class NewVacation : ContentPage
+public partial class NewVacationPage : ContentPage
 {
-	public NewVacation()
+	public NewVacationPage()
 	{
 		InitializeComponent();
 	}
