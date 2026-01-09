@@ -79,6 +79,9 @@
 	  <Compile Update="Pages\Controls\VacationComboBox.xaml.cs">
 	    <DependentUpon>VacationComboBox.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\NewVacationForm.xaml.cs">
+	    <DependentUpon>NewVacationForm.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -86,6 +89,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Controls\VacationComboBox.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\NewVacationForm.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\VacationDashboard.xaml">
