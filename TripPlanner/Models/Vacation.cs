@@ -1,62 +1,26 @@
-﻿using System.ComponentModel;
+﻿using SQLite;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace TripPlanner.Models;
 
-public partial class Vacation : INotifyPropertyChanged
+[Table("Vacations")]
+public class Vacation
 {
+    [PrimaryKey, AutoIncrement]
     [Bindable(false)]
-    public long ID 
-    {
-        get => field;
-        set
-        {
-            field = value;
-            OnPropertyChanged(nameof(ID));
-        }
-    }
+    public long ID { get; set; }
 
     [DataType(DataType.Text)]
     [Required]
     [MinLength(5)]
-    public string Name 
-    {
-        get => field ?? string.Empty;
-        set
-        {
-            //if (string.IsNullOrEmpty(value))
-            //    throw new ArgumentException("Name cannot be null or empty.");
-
-            field = value;
-            OnPropertyChanged(nameof(Name));
-        }
-    }
+    public string Name { get; set; }
 
     [DataType(DataType.Date)]
     [Required]
-    public DateTimeOffset StartDate 
-    {
-        get => field;
-        set
-        {
-            field = value;
-            OnPropertyChanged(nameof(StartDate));
-        }
-    }
+    public DateTimeOffset StartDate { get; set; }
 
     [DataType(DataType.Date)]
     [Required]
-    public DateTimeOffset EndDate 
-    {
-        get => field;
-        set
-        {
-            field = value;
-            OnPropertyChanged(nameof(EndDate));
-        }
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    public DateTimeOffset EndDate { get; set; }
 }

@@ -1,6 +1,4 @@
 using Syncfusion.Maui.Inputs;
-using System.Windows.Input;
-using TripPlanner.Models;
 using TripPlanner.PageModels.Components;
 
 namespace TripPlanner.Pages.Controls;
@@ -16,7 +14,7 @@ public partial class VacationComboBox : ContentView
 	{
 		var comboBox = (SfComboBox) sender;
 
-        if (comboBox.SelectedItem is VacationInformationModel vacation && vacation.ID == 0)
-            await Navigation.PushAsync(new NewVacationPage());
+		if (comboBox.SelectedItem is VacationInformationModel vacation && vacation.ID == 0)
+			await Shell.Current.GoToAsync("newVacation");
     }
 }

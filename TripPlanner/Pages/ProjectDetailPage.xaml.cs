@@ -1,5 +1,3 @@
-using TripPlanner.Models;
-
 namespace TripPlanner.Pages;
 
 public partial class ProjectDetailPage : ContentPage

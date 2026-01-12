@@ -2,6 +2,8 @@ using Syncfusion.Maui.Core.Hosting;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Toolkit.Hosting;
+using SQLite;
+using TripPlanner.Models;
 
 namespace TripPlanner;
 
@@ -54,6 +56,16 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MainPageModel>();
 		builder.Services.AddSingleton<ProjectListPageModel>();
 		builder.Services.AddSingleton<ManageMetaPageModel>();
+
+		builder.Services.AddSingleton<IVacationRepository>(provider =>
+		{
+			var conn = new SQLiteAsyncConnection("data.db");
+			conn.CreateTableAsync<Vacation>().Wait();
+			return new VacationRepository(conn);
+		});
+
+		builder.Services.AddTransient<NewVacationPageModel>();
+		builder.Services.AddTransientWithShellRoute<NewVacationPage, NewVacationPageModel>("newVacation");
 
 		builder.Services.AddTransientWithShellRoute<ProjectDetailPage, ProjectDetailPageModel>("project");
 		builder.Services.AddTransientWithShellRoute<TaskDetailPage, TaskDetailPageModel>("task");

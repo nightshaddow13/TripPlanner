@@ -2,3 +2,6 @@
 
 # Default severity for analyzer diagnostics with category 'UnitTesting'
 dotnet_analyzer_diagnostic.category-UnitTesting.severity = silent
+
+# JMC001: Create a mock for type name
+dotnet_diagnostic.JMC001.severity = silent

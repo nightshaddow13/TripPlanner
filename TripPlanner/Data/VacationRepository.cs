@@ -1,13 +1,20 @@
-﻿using System.Collections.ObjectModel;
+﻿using SQLite;
+using System.Collections.ObjectModel;
 using TripPlanner.Models;
 
 namespace TripPlanner.Data;
 
-public class VacationRepository
+public class VacationRepository : IVacationRepository
 {
+    private readonly SQLiteAsyncConnection _connection;
+
     public ObservableCollection<Vacation> Vacation { get; set; } = [];
 
-    public VacationRepository() => GenerateVacation();
+    public VacationRepository(SQLiteAsyncConnection connection)
+    {
+        _connection = connection;
+        GenerateVacation();
+    }
 
     private void GenerateVacation()
     {
@@ -35,5 +42,10 @@ public class VacationRepository
                 EndDate = new DateTimeOffset(new DateTime(2024, 3, 20))
             }
         ];
+    }
+
+    public async Task SaveAsync(Vacation vacation)
+    {
+        await _connection.InsertOrReplaceAsync(vacation);
     }
 }
