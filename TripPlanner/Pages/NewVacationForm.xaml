@@ -2,13 +2,22 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sf="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
+             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:model="clr-namespace:TripPlanner.PageModels"
              x:Class="TripPlanner.Pages.NewVacationPage"
              x:DataType="model:NewVacationPageModel"
              Title="Create Vacation">
 
-    <sf:SfDataForm DataObject="{Binding Vacation}" 
-                   LayoutType="TextInputLayout"
-                   ValidationMode="PropertyChanged"
-                   CommitMode="PropertyChanged" />
+    <!--https://github.com/SyncfusionExamples/.NET-MAUI-Data-form-SQLite/tree/master/DataFormMAUI-->
+    <StackLayout>
+        <sf:SfDataForm DataObject="{Binding Vacation}" 
+                       LayoutType="TextInputLayout"
+                       ValidationMode="PropertyChanged"
+                       CommitMode="PropertyChanged"
+                       x:Name="dataForm"/>
+
+        <buttons:SfButton Text="Save"
+                          Clicked="OnSaveClicked" />
+    </StackLayout>
+
 </ContentPage>
