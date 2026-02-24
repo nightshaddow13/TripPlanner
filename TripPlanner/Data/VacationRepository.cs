@@ -4,24 +4,20 @@ using TripPlanner.Models;
 
 namespace TripPlanner.Data;
 
-public class VacationRepository : IVacationRepository
+public class VacationRepository(SQLiteAsyncConnection connection) : IVacationRepository
 {
-    private readonly SQLiteAsyncConnection _connection;
-
     public ObservableCollection<Vacation> Vacation { get; set; } = [];
 
-    public VacationRepository(SQLiteAsyncConnection connection)
-    {
-        _connection = connection;
-    }
+    public event EventHandler<Vacation>? VacationSaved;
 
     public async Task<IEnumerable<Vacation>> GetAllAsync()
     {
-        return await _connection.Table<Vacation>().ToListAsync();
+        return await connection.Table<Vacation>().ToListAsync();
     }
 
     public async Task SaveAsync(Vacation vacation)
     {
-        await _connection.InsertOrReplaceAsync(vacation);
+        await connection.InsertOrReplaceAsync(vacation);
+        VacationSaved?.Invoke(this, vacation);
     }
 }

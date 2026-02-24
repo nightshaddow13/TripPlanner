@@ -15,6 +15,15 @@ public class VacationComboBoxModel
         _repo = repo;
         // Add default "Create New" option
         Vacations.Add(new VacationInformationModel(0, "Create New Vacation", DateTimeOffset.Now));
+        
+        // Subscribe to vacation saved event
+        _repo.VacationSaved += OnVacationSaved;
+    }
+
+    private async void OnVacationSaved(object? sender, Vacation vacation)
+    {
+        // Reload all vacations from database
+        await LoadVacationsAsync();
     }
 
     public async Task LoadVacationsAsync()
@@ -32,8 +41,8 @@ public class VacationComboBoxModel
                 Vacations.Add(createNewOption);
             }
 
-            // Add vacations from repository
-            foreach (var vacation in vacations.OrderBy(x => x.StartDate))
+            // Add vacations from repository ordered by StartDate descending (newest to oldest)
+            foreach (var vacation in vacations.OrderByDescending(x => x.StartDate))
             {
                 Vacations.Add(new VacationInformationModel(vacation.ID, vacation.Name, vacation.StartDate));
             }
