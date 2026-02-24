@@ -6,37 +6,40 @@
              x:DataType="pageModels:VacationDashboardPageModel"
              Title="Vacation Dashboard">
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+        <Grid Padding="20">
+            <!-- Vacation Content -->
+            <VerticalStackLayout Spacing="15" IsVisible="{Binding HasVacations}">
 
-            <Label Text="{Binding CurrentVacation.Name, TargetNullValue='Loading...'}"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"/>
+                <Label Text="{Binding CurrentVacation.Name, TargetNullValue='Loading...'}"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
 
-            <Border StrokeThickness="1"
-                    Stroke="{StaticResource Gray200}"
-                    Padding="15"
-                    StrokeShape="RoundRectangle 10"
-                    IsVisible="{Binding CurrentVacation, Converter={StaticResource IsNotNullConverter}}">
-                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" RowSpacing="10" ColumnSpacing="10">
+                <Border StrokeThickness="1"
+                        Stroke="{StaticResource Gray200}"
+                        Padding="15"
+                        StrokeShape="RoundRectangle 10">
+                    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" RowSpacing="10" ColumnSpacing="10">
 
-                    <Label Text="Start Date:" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
-                    <Label Text="{Binding CurrentVacation.StartDate, StringFormat='{0:MMM dd, yyyy}'}" Grid.Row="0" Grid.Column="1"/>
+                        <Label Text="Start Date:" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="{Binding CurrentVacation.StartDate, StringFormat='{0:MMM dd, yyyy}'}" Grid.Row="0" Grid.Column="1"/>
 
-                    <Label Text="End Date:" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
-                    <Label Text="{Binding CurrentVacation.EndDate, StringFormat='{0:MMM dd, yyyy}'}" Grid.Row="1" Grid.Column="1"/>
+                        <Label Text="End Date:" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                        <Label Text="{Binding CurrentVacation.EndDate, StringFormat='{0:MMM dd, yyyy}'}" Grid.Row="1" Grid.Column="1"/>
 
-                    <Label Text="Location:" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
-                    <Label Text="{Binding CurrentVacation.Location}" Grid.Row="2" Grid.Column="1"/>
+                        <Label Text="Location:" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                        <Label Text="{Binding CurrentVacation.Location}" Grid.Row="2" Grid.Column="1"/>
 
-                </Grid>
-            </Border>
+                    </Grid>
+                </Border>
 
-            <Label Text="Dashboard content coming soon..."
-                   HorizontalOptions="Center"
-                   Margin="0,40,0,0"
-                   TextColor="{StaticResource Gray400}"/>
+                <Label Text="Dashboard content coming soon..."
+                       HorizontalOptions="Center"
+                       Margin="0,40,0,0"
+                       TextColor="{StaticResource Gray400}"/>
 
-        </VerticalStackLayout>
+            </VerticalStackLayout>
+            
+        </Grid>
     </ScrollView>
 </ContentPage>

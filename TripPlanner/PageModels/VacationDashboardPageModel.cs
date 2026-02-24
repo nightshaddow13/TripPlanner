@@ -14,6 +14,9 @@ public partial class VacationDashboardPageModel : ObservableObject, IQueryAttrib
     [ObservableProperty]
     private long _vacationId;
 
+    [ObservableProperty]
+    private bool _hasVacations = true;
+
     public VacationDashboardPageModel(IVacationRepository repo)
     {
         _repo = repo;
@@ -45,6 +48,11 @@ public partial class VacationDashboardPageModel : ObservableObject, IQueryAttrib
                 await LoadVacationAsync(id);
             }
         }
+        else
+        {
+            // No vacation ID provided, load the most recent vacation
+            await LoadMostRecentVacationAsync();
+        }
     }
 
     private async Task LoadVacationAsync(long id)
@@ -53,10 +61,42 @@ public partial class VacationDashboardPageModel : ObservableObject, IQueryAttrib
         {
             var vacations = await _repo.GetAllAsync();
             CurrentVacation = vacations.FirstOrDefault(v => v.ID == id);
+            HasVacations = vacations.Any();
         }
         catch (Exception)
         {
-            // Handle error - could show message to user
+            // Handle error
+            HasVacations = false;
         }
+    }
+
+    private async Task LoadMostRecentVacationAsync()
+    {
+        try
+        {
+            var vacations = await _repo.GetAllAsync();
+            
+            if (vacations.Any())
+            {
+                // Load the most recent vacation (by start date)
+                CurrentVacation = vacations.OrderByDescending(v => v.StartDate).FirstOrDefault();
+                VacationId = CurrentVacation?.ID ?? 0;
+                HasVacations = true;
+            }
+            else
+            {
+                HasVacations = false;
+            }
+        }
+        catch (Exception)
+        {
+            // Handle error
+            HasVacations = false;
+        }
+    }
+
+    public async Task InitializeAsync()
+    {
+        await LoadMostRecentVacationAsync();
     }
 }

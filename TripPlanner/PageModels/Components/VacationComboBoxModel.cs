@@ -13,8 +13,6 @@ public class VacationComboBoxModel
     public VacationComboBoxModel(IVacationRepository repo)
     {
         _repo = repo;
-        // Add default "Create New" option
-        Vacations.Add(new VacationInformationModel(0, "Create New Vacation", DateTimeOffset.Now));
         
         // Subscribe to vacation saved event
         _repo.VacationSaved += OnVacationSaved;
@@ -31,25 +29,29 @@ public class VacationComboBoxModel
         try
         {
             var vacations = await _repo.GetAllAsync();
+            var today = DateTimeOffset.Now.Date;
             
-            // Clear existing items except the "Create New" option
-            var createNewOption = Vacations.FirstOrDefault();
+            // Clear existing items
             Vacations.Clear();
-            
-            if (createNewOption != null)
-            {
-                Vacations.Add(createNewOption);
-            }
 
-            // Add vacations from repository ordered by StartDate descending (newest to oldest)
-            foreach (var vacation in vacations.OrderByDescending(x => x.StartDate))
+            // Add upcoming vacations ordered by StartDate ascending (soonest first)
+            var upcomingVacations = vacations
+                .Where(x => x.StartDate.Date >= today)
+                .OrderBy(x => x.StartDate);
+
+            foreach (var vacation in upcomingVacations)
             {
                 Vacations.Add(new VacationInformationModel(vacation.ID, vacation.Name, vacation.StartDate));
             }
+            
+            // Always add "Create New" option at the end
+            Vacations.Add(new VacationInformationModel(0, "Create New Vacation", DateTimeOffset.Now));
         }
         catch (Exception)
         {
-            // Handle exception - vacations will remain with just the "Create New" option
+            // Handle exception - ensure "Create New" option is available
+            Vacations.Clear();
+            Vacations.Add(new VacationInformationModel(0, "Create New Vacation", DateTimeOffset.Now));
         }
     }
 }
