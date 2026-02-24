@@ -17,7 +17,16 @@ public class VacationRepository(SQLiteAsyncConnection connection) : IVacationRep
 
     public async Task SaveAsync(Vacation vacation)
     {
-        await connection.InsertOrReplaceAsync(vacation);
+        if (vacation.ID == 0)
+        {
+            // Insert new vacation - SQLite will auto-increment the ID
+            await connection.InsertAsync(vacation);
+        }
+        else
+        {
+            // Update existing vacation
+            await connection.UpdateAsync(vacation);
+        }
         VacationSaved?.Invoke(this, vacation);
     }
 }
