@@ -5,9 +5,8 @@ namespace TripPlanner.Pages;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage(MainPageModel model)
+	public MainPage()
 	{
 		InitializeComponent();
-		BindingContext = model;
 	}
 }

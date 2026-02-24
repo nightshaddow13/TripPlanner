@@ -23,8 +23,8 @@ public partial class NewVacationPageModel : INotifyPropertyChanged
         get => _vacation;
         set
         {
-            _vacation = value; 
-            OnPropertyChanged(nameof(Vacation)) ;
+            _vacation = value;
+            OnPropertyChanged(nameof(Vacation));
         }
     }
 
@@ -36,7 +36,9 @@ public partial class NewVacationPageModel : INotifyPropertyChanged
         try
         {
             await _repo.SaveAsync(Vacation);
-            // todo: handle success
+
+            // Navigate to the vacation dashboard with the newly created vacation ID
+            await Shell.Current.GoToAsync($"vacationDashboard?vacationId={Vacation.ID}");
         }
         catch (Exception ex)
         {
@@ -44,9 +46,9 @@ public partial class NewVacationPageModel : INotifyPropertyChanged
         }
     }
 
-    private void Cancel()
+    private async void Cancel()
     {
-        // todo: handle cancel
+        await Shell.Current.GoToAsync("..");
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

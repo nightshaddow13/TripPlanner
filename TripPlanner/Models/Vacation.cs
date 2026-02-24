@@ -14,7 +14,7 @@ public class Vacation
     [DataType(DataType.Text)]
     [Required]
     [MinLength(5)]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [DataType(DataType.Date)]
     [Required]
@@ -23,4 +23,7 @@ public class Vacation
     [DataType(DataType.Date)]
     [Required]
     public DateTimeOffset EndDate { get; set; }
+
+    [DataType(DataType.Text)]
+    public string Location { get; set; } = string.Empty;
 }

@@ -51,7 +51,18 @@ public partial class VacationComboBox : ContentView
     {
         var comboBox = (SfComboBox) sender;
 
-        if (comboBox.SelectedItem is VacationInformationModel vacation && vacation.ID == 0)
-            await Shell.Current.GoToAsync("newVacation");
+        if (comboBox.SelectedItem is VacationInformationModel vacation)
+        {
+            if (vacation.ID == 0)
+            {
+                // Navigate to create new vacation
+                await Shell.Current.GoToAsync("newVacation");
+            }
+            else
+            {
+                // Navigate to vacation dashboard
+                await Shell.Current.GoToAsync($"vacationDashboard?vacationId={vacation.ID}");
+            }
+        }
     }
 }

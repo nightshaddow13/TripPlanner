@@ -13,23 +13,12 @@
         <controls:VacationComboBox Margin="10" />
     </Shell.FlyoutHeader>
 
+    <!-- Empty flyout with no default content visible -->
     <ShellContent
-        Title="EDashboard"
+        Title="Vacation Dashboard"
         Icon="{StaticResource IconDashboard}"
         ContentTemplate="{DataTemplate pages:MainPage}"
         Route="main" />
-
-    <ShellContent
-        Title="EProjects"
-        Icon="{StaticResource IconProjects}"
-        ContentTemplate="{DataTemplate pages:ProjectListPage}"
-        Route="projects" />
-
-    <ShellContent
-        Title="EManage Meta"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:ManageMetaPage}"
-        Route="manage" />
 
     <Shell.FlyoutFooter>
         <Grid Padding="15">

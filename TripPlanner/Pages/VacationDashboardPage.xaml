@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModels="clr-namespace:TripPlanner.PageModels"
+             x:Class="TripPlanner.Pages.VacationDashboardPage"
+             x:DataType="pageModels:VacationDashboardPageModel"
+             Title="Vacation Dashboard">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="{Binding CurrentVacation.Name, TargetNullValue='Loading...'}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <Border StrokeThickness="1"
+                    Stroke="{StaticResource Gray200}"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 10"
+                    IsVisible="{Binding CurrentVacation, Converter={StaticResource IsNotNullConverter}}">
+                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" RowSpacing="10" ColumnSpacing="10">
+
+                    <Label Text="Start Date:" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                    <Label Text="{Binding CurrentVacation.StartDate, StringFormat='{0:MMM dd, yyyy}'}" Grid.Row="0" Grid.Column="1"/>
+
+                    <Label Text="End Date:" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                    <Label Text="{Binding CurrentVacation.EndDate, StringFormat='{0:MMM dd, yyyy}'}" Grid.Row="1" Grid.Column="1"/>
+
+                    <Label Text="Location:" FontAttributes="Bold" Grid.Row="2" Grid.Column="0"/>
+                    <Label Text="{Binding CurrentVacation.Location}" Grid.Row="2" Grid.Column="1"/>
+
+                </Grid>
+            </Border>
+
+            <Label Text="Dashboard content coming soon..."
+                   HorizontalOptions="Center"
+                   Margin="0,40,0,0"
+                   TextColor="{StaticResource Gray400}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
