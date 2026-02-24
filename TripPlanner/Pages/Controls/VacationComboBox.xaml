@@ -9,7 +9,6 @@
     <ContentView.Content>
         <editors:SfComboBox x:Name="comboBox" 
                             ItemsSource="{Binding Vacations}"
-                            SelectedIndex="0"
                             TextMemberPath="Name"
                             IsClearButtonVisible="False"
                             SelectionChanged="OnSelectionChanged" />

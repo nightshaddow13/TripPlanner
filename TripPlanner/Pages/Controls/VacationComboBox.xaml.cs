@@ -31,6 +31,12 @@ public partial class VacationComboBox : ContentView
     {
         Loaded -= OnLoaded; // Unsubscribe to prevent multiple loads
         await LoadDataAsync();
+        
+        // Select the first vacation after loading
+        if (_viewModel?.Vacations.Count > 0)
+        {
+            comboBox.SelectedIndex = 0;
+        }
     }
 
     public void SetViewModel(VacationComboBoxModel viewModel)

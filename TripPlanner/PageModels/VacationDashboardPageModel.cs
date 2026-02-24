@@ -50,8 +50,8 @@ public partial class VacationDashboardPageModel : ObservableObject, IQueryAttrib
         }
         else
         {
-            // No vacation ID provided, load the most recent vacation
-            await LoadMostRecentVacationAsync();
+            // No vacation ID provided, load the first upcoming vacation
+            await LoadFirstUpcomingVacationAsync();
         }
     }
 
@@ -70,18 +70,23 @@ public partial class VacationDashboardPageModel : ObservableObject, IQueryAttrib
         }
     }
 
-    private async Task LoadMostRecentVacationAsync()
+    private async Task LoadFirstUpcomingVacationAsync()
     {
         try
         {
             var vacations = await _repo.GetAllAsync();
+            var today = DateTimeOffset.Now.Date;
             
             if (vacations.Any())
             {
-                // Load the most recent vacation (by start date)
-                CurrentVacation = vacations.OrderByDescending(v => v.StartDate).FirstOrDefault();
+                // Load the first upcoming vacation (soonest by start date)
+                CurrentVacation = vacations
+                    .Where(v => v.StartDate.Date >= today)
+                    .OrderBy(v => v.StartDate)
+                    .FirstOrDefault();
+                
                 VacationId = CurrentVacation?.ID ?? 0;
-                HasVacations = true;
+                HasVacations = CurrentVacation != null;
             }
             else
             {
@@ -97,6 +102,6 @@ public partial class VacationDashboardPageModel : ObservableObject, IQueryAttrib
 
     public async Task InitializeAsync()
     {
-        await LoadMostRecentVacationAsync();
+        await LoadFirstUpcomingVacationAsync();
     }
 }
