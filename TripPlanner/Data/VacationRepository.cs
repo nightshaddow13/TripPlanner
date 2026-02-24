@@ -13,35 +13,11 @@ public class VacationRepository : IVacationRepository
     public VacationRepository(SQLiteAsyncConnection connection)
     {
         _connection = connection;
-        GenerateVacation();
     }
 
-    private void GenerateVacation()
+    public async Task<IEnumerable<Vacation>> GetAllAsync()
     {
-        Vacation =
-        [
-            new Vacation
-            {
-                ID = 1,
-                Name = "Summer Trip to Italy",
-                StartDate = new DateTimeOffset(new DateTime(2024, 6, 15)),
-                EndDate = new DateTimeOffset(new DateTime(2024, 6, 30))
-            },
-            new Vacation
-            {
-                ID = 2,
-                Name = "Winter Skiing in Switzerland",
-                StartDate = new DateTimeOffset(new DateTime(2024, 12, 20)),
-                EndDate = new DateTimeOffset(new DateTime(2025, 1, 5))
-            },
-            new Vacation
-            {
-                ID = 3,
-                Name = "Spring Break in Japan",
-                StartDate = new DateTimeOffset(new DateTime(2024, 3, 10)),
-                EndDate = new DateTimeOffset(new DateTime(2024, 3, 20))
-            }
-        ];
+        return await _connection.Table<Vacation>().ToListAsync();
     }
 
     public async Task SaveAsync(Vacation vacation)
